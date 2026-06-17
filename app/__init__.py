@@ -1,0 +1,1 @@
+"""NutriScan AI application package."""
