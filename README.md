@@ -9,76 +9,161 @@ pinned: false
 
 # NutriScan AI
 
-Resume-worthy hackathon project that scans packaged food nutrition labels and ingredient lists, extracts structured text and tables with Docling, and asks a Groq-hosted LLM to return strict structured JSON with explainable nutrition analysis.
+NutriScan AI analyzes packaged food labels from images and provides structured nutritional insights, health scores, and consumption recommendations.
 
 ## Features
 
-- Upload separate ingredient-list and nutrition-chart images through Streamlit.
-- Extract structured text and nutrition tables from both images with Docling.
-- Use one LLM call for both extraction and reasoning.
-- Return strict JSON with nutrients, ingredients, health score, breakdown, consumption frequency, recommended consuming weight, recommendations, and diet tips.
-- Optional FastAPI backend for API-first demos.
+- Extracts text and tables from ingredient labels and nutrition charts
+- Identifies macro and micro nutrients
+- Generates an explainable health score
+- Highlights positive and negative aspects
+- Detects concerning ingredients
+- Provides consumption guidance and healthier alternatives
+- FastAPI backend with Streamlit interface
 
 ## Tech Stack
 
-- Python
-- FastAPI
-- Streamlit
-- Docling
-- Groq API
+| Component | Technology |
+|------------|------------|
+| Language | Python |
+| Backend | FastAPI |
+| Frontend | Streamlit |
+| OCR & Document Processing | Docling |
+| LLM Inference | Groq API |
+| Data Validation | Pydantic |
 
 ## Project Structure
 
 ```text
-nutriscan-ai/
-  app/
-    api.py              # FastAPI endpoints
-    config.py           # Environment-based settings
-    llm.py              # Groq JSON analysis client
-    ocr.py              # Docling image/table extraction
-    prompts.py          # LLM prompt for extraction + analysis
-    schemas.py          # Pydantic response models
-    utils.py            # Image/file helpers
-  streamlit_app.py      # Streamlit UI
-  requirements.txt
-  .env.example
+NutriScan-AI
+│
+├── app
+│   ├── __init__.py
+│   ├── api.py
+│   ├── config.py
+│   ├── llm.py
+│   ├── ocr.py
+│   ├── prompts.py
+│   ├── schemas.py
+│   └── utils.py
+│
+├── streamlit_app.py
+├── requirements.txt
+├── .gitignore
+└── README.md
 ```
 
-## Setup
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/tanishq-2004/NutriScan-AI.git
+cd NutriScan-AI
+```
+
+Create a virtual environment:
+
+### Windows
 
 ```bash
 python -m venv .venv
 .venv\Scripts\activate
+```
+
+### Linux / macOS
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
 pip install -r requirements.txt
-copy .env.example .env
 ```
 
-Add your Groq API key to `.env`:
+## Environment Variables
 
-```text
-GROQ_API_KEY=your_groq_api_key_here
+Create a `.env` file in the project root:
+
+```env
+GROQ_API_KEY=your_api_key
+GROQ_MODEL=llama-3.3-70b-versatile
 ```
 
-## Run Streamlit
+## Running the Streamlit App
 
 ```bash
 streamlit run streamlit_app.py
 ```
 
-## Run FastAPI
+Open:
+
+```
+http://localhost:8501
+```
+
+## Running the API
 
 ```bash
 uvicorn app.api:app --reload
 ```
 
-Then open:
+API documentation:
 
-```text
+```
 http://127.0.0.1:8000/docs
 ```
 
-## Notes
+## API Endpoint
 
-NutriScan AI is educational and should not replace medical advice. Nutrition-label formats vary widely, so the app preserves extracted text from both uploads and lets the LLM perform robust extraction and reasoning without regex-heavy parsing or hardcoded ingredient lists. Product names are intentionally excluded because they are not required for nutrition analysis.
+### POST `/scan`
 
-Both ingredients and nutrition charts are extracted with Docling. This keeps table structure available for nutrition charts instead of flattening rows and columns into noisy OCR text.
+Accepts:
+
+- `ingredients_image`
+- `nutrition_image`
+
+Returns:
+
+- OCR extracted text
+- Ingredients
+- Macro nutrients
+- Micro nutrients
+- Health score
+- Positive aspects
+- Negative aspects
+- Concerning ingredients
+- Consumption guidance
+- Healthier alternatives
+- Balanced diet recommendations
+
+## Workflow
+
+1. Upload ingredient label image.
+2. Upload nutrition chart image.
+3. Extract text and tables from the images.
+4. Analyze nutritional information.
+5. Generate health scores and recommendations.
+6. Display structured results.
+
+## Future Improvements
+
+- Batch scanning
+- Image preprocessing
+- Barcode-based product lookup
+- Product comparison
+- Nutrition history tracking
+
+## Author
+
+**Tanishq Gupta**
+
+- GitHub: https://github.com/tanishq-2004
+- LinkedIn: https://www.linkedin.com/in/tanishq-gupta-w/
+
+## License
+
+This project is licensed under the MIT License.
