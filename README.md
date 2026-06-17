@@ -1,3 +1,12 @@
+---
+title: NutriScan
+emoji: 🔥
+colorFrom: green
+colorTo: gray
+sdk: docker
+pinned: false
+---
+
 # NutriScan AI
 
 Resume-worthy hackathon project that scans packaged food nutrition labels and ingredient lists, extracts structured text and tables with Docling, and asks a Groq-hosted LLM to return strict structured JSON with explainable nutrition analysis.
