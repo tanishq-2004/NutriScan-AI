@@ -1,15 +1,10 @@
----
-title: NutriScan
-emoji: 🔥
-colorFrom: green
-colorTo: gray
-sdk: docker
-pinned: false
----
-
 # NutriScan AI
 
 NutriScan AI analyzes packaged food labels from images and provides structured nutritional insights, health scores, and consumption recommendations.
+
+## Live Demo
+
+🚀 https://huggingface.co/spaces/Skywalker67/NutriScan-AI
 
 ## Features
 
@@ -17,9 +12,33 @@ NutriScan AI analyzes packaged food labels from images and provides structured n
 - Identifies macro and micro nutrients
 - Generates an explainable health score
 - Highlights positive and negative aspects
-- Detects concerning ingredients
+- Detects concerning ingredients with severity and reasons
+- Identifies beneficial ingredients
 - Provides consumption guidance and healthier alternatives
+- Generates balanced diet recommendations
 - FastAPI backend with Streamlit interface
+
+## Screenshots
+
+### Home Page
+
+![Home Page](https://raw.githubusercontent.com/tanishq-2004/NutriScan-AI/main/assets/home_page.png)
+
+### Upload Images
+
+![Upload Images](https://raw.githubusercontent.com/tanishq-2004/NutriScan-AI/main/assets/upload_images.jpg)
+
+### Analysis Result (Part 1)
+
+![Analysis Result 1](https://raw.githubusercontent.com/tanishq-2004/NutriScan-AI/main/assets/analysis_result1.png)
+
+### Analysis Result (Part 2)
+
+![Analysis Result 2](https://raw.githubusercontent.com/tanishq-2004/NutriScan-AI/main/assets/analysis_result2.png)
+
+### Analysis Result (Part 3)
+
+![Analysis Result 3](https://raw.githubusercontent.com/tanishq-2004/NutriScan-AI/main/assets/analysis_result3.png)
 
 ## Tech Stack
 
@@ -31,6 +50,7 @@ NutriScan AI analyzes packaged food labels from images and provides structured n
 | OCR & Document Processing | Docling |
 | LLM Inference | Groq API |
 | Data Validation | Pydantic |
+| Deployment | Hugging Face Spaces (Docker) |
 
 ## Project Structure
 
@@ -102,7 +122,7 @@ streamlit run streamlit_app.py
 
 Open:
 
-```
+```text
 http://localhost:8501
 ```
 
@@ -114,18 +134,28 @@ uvicorn app.api:app --reload
 
 API documentation:
 
-```
+```text
 http://127.0.0.1:8000/docs
 ```
 
 ## Workflow
 
-1. Upload ingredient label and nutrition chart images.
-2. Images are preprocessed for improved OCR accuracy.
-3. Text and tables are extracted from the images.
-4. Nutritional information is analyzed.
-5. Health scores and recommendations are generated.
-6. Structured results are displayed.
+1. Upload ingredient-list and nutrition-chart images.
+2. Images are processed using Docling.
+3. Text and nutrition tables are extracted.
+4. Groq analyzes ingredients and nutritional information.
+5. Macro and micro nutrients are identified.
+6. Health score and score breakdown are generated.
+7. Concerning and beneficial ingredients are highlighted.
+8. Healthier alternatives and balanced diet tips are provided.
+
+## Deployment
+
+The application is deployed on Hugging Face Spaces using Docker.
+
+**Live Demo**
+
+https://huggingface.co/spaces/Skywalker67/NutriScan-AI
 
 ## Future Improvements
 
