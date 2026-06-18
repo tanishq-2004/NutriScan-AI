@@ -49,6 +49,7 @@ NutriScan-AI
 │
 ├── streamlit_app.py
 ├── requirements.txt
+├── Dockerfile
 ├── .gitignore
 └── README.md
 ```
@@ -117,45 +118,22 @@ API documentation:
 http://127.0.0.1:8000/docs
 ```
 
-## API Endpoint
-
-### POST `/scan`
-
-Accepts:
-
-- `ingredients_image`
-- `nutrition_image`
-
-Returns:
-
-- OCR extracted text
-- Ingredients
-- Macro nutrients
-- Micro nutrients
-- Health score
-- Positive aspects
-- Negative aspects
-- Concerning ingredients
-- Consumption guidance
-- Healthier alternatives
-- Balanced diet recommendations
-
 ## Workflow
 
-1. Upload ingredient label image.
-2. Upload nutrition chart image.
-3. Extract text and tables from the images.
-4. Analyze nutritional information.
-5. Generate health scores and recommendations.
-6. Display structured results.
+1. Upload ingredient label and nutrition chart images.
+2. Images are preprocessed for improved OCR accuracy.
+3. Text and tables are extracted from the images.
+4. Nutritional information is analyzed.
+5. Health scores and recommendations are generated.
+6. Structured results are displayed.
 
 ## Future Improvements
 
 - Batch scanning
-- Image preprocessing
 - Barcode-based product lookup
 - Product comparison
 - Nutrition history tracking
+- Product database integration
 
 ## Author
 
